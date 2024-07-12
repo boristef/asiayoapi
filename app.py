@@ -13,10 +13,23 @@ class OrderValidator:
         self.errors = []
 
     def validate(self):
+        self.validate_required_fields()
         self.validate_name()
         self.validate_price()
         self.validate_currency()
         return self.errors
+
+    def validate_required_fields(self):
+        required_fields = {
+            'name': str,
+            'price': (int, float),
+            'currency': str
+        }
+        for field, field_type in required_fields.items():
+            if field not in self.data:
+                self.errors.append(f'400 - {field} is required')
+            elif not isinstance(self.data[field], field_type):
+                self.errors.append(f'400 - {field} must be of type {field_type.__name__}')
 
     def validate_name(self):
         name = self.data.get('name', '')

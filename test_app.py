@@ -70,3 +70,26 @@ def test_convert_usd_to_twd_over2000(client):
     assert response.status_code == 400
     assert '400 - price is over 2000' in response.json['errors']
 
+def test_missing_name(client):
+    response = client.post('/api/orders', json={
+        "price": 1500,
+        "currency": "USD"
+    })
+    assert response.status_code == 400
+    assert "400 - name is required" in response.get_json()["errors"]
+
+def test_missing_price(client):
+    response = client.post('/api/orders', json={
+        "name": "Melody Holiday Inn",
+        "currency": "USD"
+    })
+    assert response.status_code == 400
+    assert "400 - price is required" in response.get_json()["errors"]
+
+def test_missing_currency(client):
+    response = client.post('/api/orders', json={
+        "name": "Melody Holiday Inn",
+        "price": 1500
+    })
+    assert response.status_code == 400
+    assert "400 - currency is required" in response.get_json()["errors"]
