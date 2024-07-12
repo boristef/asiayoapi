@@ -30,12 +30,12 @@
     建立 Docker 映像：
     ```bash
     docker build -t order-processing-api
-
+    ```
     啟動 Docker 容器：
 
     ```bash
     docker run -p 5000:5000 order-processing-api
-
+    ```
  3. 發送 POST 請求至 /api/orders 來處理訂單。
 
 範例
