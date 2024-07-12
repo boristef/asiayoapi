@@ -24,3 +24,22 @@
 1. 安裝requirements：
    ```bash
    pip install -r requirements.txt
+
+2. 使用 Docker 容器化應用程式：
+
+    建立 Docker 映像：
+    docker build -t order-processing-api .
+    啟動 Docker 容器：
+    docker run -p 5000:5000 order-processing-api
+
+ 3. 發送 POST 請求至 /api/orders 來處理訂單。
+
+範例
+
+    {
+    "name": "Product A",
+    "price": 50,
+    "currency": "USD"
+    }
+## 錯誤處理
+若驗證或轉換過程中出現錯誤，將返回適當的錯誤訊息和 HTTP 狀態碼。
